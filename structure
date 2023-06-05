@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+mkdir cmd
+touch cmd/main.go
+
+mkdir internal
+mkdir internal/wallet
+touch internal/wallet/wallet.go
+
+rm structure
