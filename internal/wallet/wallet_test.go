@@ -37,3 +37,17 @@ func TestWithdraw(t *testing.T) {
 	// Assert.
 	if
 }
+
+func TestBalance(t *testing.T) {
+	// Arrange.
+	initalBalance := wallet.Money(100)
+	testWallet := wallet.NewWallet(initalBalance)
+
+	// Act.
+	testBalance := testWallet.Balance()
+
+	// Assert.
+	if testBalance != initalBalance {
+		t.Errorf("Balance doesn't return the current wallet balance as expected...")
+	}
+}
