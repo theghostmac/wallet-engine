@@ -2,43 +2,43 @@ package wallet
 
 import "sync"
 
-// Wallet represents a user's wallet.
-type money int64
+// Money represents monetary values.
+type Money int64
 
 // Wallet represents a user's wallet.
 type Wallet struct {
-	balance money
-	mutex   sync.Mutex
+	WalletBalance Money
+	mutex         sync.Mutex
 }
 
 // NewWallet creates a new Wallet instance with the given initial balance.
-func NewWallet(initialBalance money) *Wallet {
+func NewWallet(initialBalance Money) *Wallet {
 	return &Wallet{
-		balance: initialBalance,
+		WalletBalance: initialBalance,
 	}
 }
 
 // Deposit adds funds to the wallet.
-func (w *Wallet) Deposit(amount money) {
+func (w *Wallet) Deposit(amount Money) {
 	w.mutex.Lock()
 	defer w.mutex.Unlock()
 
-	w.balance += amount
+	w.WalletBalance += amount
 }
 
 // Withdraw deducts funds from the wallet if sufficient balance is available.
-func (w *Wallet) Withdraw(amount money) bool {
+func (w *Wallet) Withdraw(amount Money) bool {
 	w.mutex.Lock()
 	defer w.mutex.Unlock()
 
-	if w.balance >= amount {
-		w.balance -= amount
+	if w.WalletBalance >= amount {
+		w.WalletBalance -= amount
 		return true
 	}
 	return false
 }
 
 // Balance returns the current balance of the wallet.
-func (w *Wallet) Balance() money {
-	return w.balance
+func (w *Wallet) Balance() Money {
+	return w.WalletBalance
 }
